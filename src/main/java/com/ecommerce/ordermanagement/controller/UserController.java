@@ -1,5 +1,7 @@
 package com.ecommerce.ordermanagement.controller;
 
+import com.ecommerce.ordermanagement.dto.LoginRequest;
+import com.ecommerce.ordermanagement.dto.LoginResponse;
 import com.ecommerce.ordermanagement.dto.UserRequest;
 import com.ecommerce.ordermanagement.dto.UserResponse;
 import com.ecommerce.ordermanagement.entity.User;
@@ -25,5 +27,12 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(userService.registerUser(userReq));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody LoginRequest userReq){
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(userService.login(userReq));
     }
 }

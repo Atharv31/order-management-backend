@@ -24,6 +24,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidCredentialException.class)
+    public ResponseEntity<Map<String, Object>> handleEmailExistsException(
+            InvalidCredentialException ex) {
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("error", ex.getMessage());
+            map.put("status", HttpStatus.BAD_REQUEST.value());
+            map.put("timestamp", LocalDateTime.now());
+        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationErrors(
             MethodArgumentNotValidException ex) {
